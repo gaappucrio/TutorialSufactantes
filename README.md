@@ -13,6 +13,7 @@ Abra o terminal do WSL e execute:
 sudo apt update
 sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl git
 ```
+
 Configuração do Python (via pyenv):
 
 ```bash
@@ -27,12 +28,14 @@ pyenv activate projeto_surfactantes
 
 # Instala as bibliotecas de processamento e Inteligência Artificial
 pip install pandas numpy scikit-learn xgboost matplotlib
+```
+
 🔄 2. O Pipeline de Dados (ETL)
 O banco de dados original armazena os experimentos químicos em um formato JSON aninhado, onde as medições são salvas como strings de texto. O script de ETL (extrator_etl.py) abre esse banco, interpreta a matemática e "achata" os dados em um CSV estruturado.
 
 Crie o arquivo extrator_etl.py e rode com python extrator_etl.py:
 
-Python
+```bash
 import json
 import ast
 import pandas as pd
@@ -90,12 +93,14 @@ for molecula_id, info in dados_brutos.items():
 df = pd.DataFrame(dados_processados)
 df.to_csv('dados_limpos_surfactantes.csv', index=False)
 print(f"Sucesso! Gerados {len(df)} pontos no arquivo 'dados_limpos_surfactantes.csv'.")
+
+```
 🧠 3. Treinamento da Inteligência Artificial
 Com o CSV em mãos, a IA entra em ação. O script abaixo (treinar_modelo.py) foi blindado para rodar perfeitamente tanto com poucos dados (testes rápidos) quanto com milhares de registros (treinamento real).
 
 Execute com python treinar_modelo.py:
 
-Python
+```bash
 import pandas as pd
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
@@ -139,6 +144,8 @@ acuracia = accuracy_score(y_test, previsoes)
 print("\n=== Resultado Científico ===")
 print(f"Acurácia: {acuracia * 100:.2f}%\n")
 print(classification_report(y_test, previsoes, target_names=encoder.classes_))
+```
+
 ⚙️ Como Customizar o Projeto (Guia para o Time)
 A infraestrutura foi pensada para ser modular. O seu grupo pode alterar livremente os dados e as técnicas aplicadas.
 
@@ -161,7 +168,7 @@ Se quiserem comparar a performance com Redes Neurais (MLP) ou Árvores de Decis�
 Exemplo: Trocando para o Random Forest
 No topo do arquivo, adicione o import:
 
-Python
+```bash
 from sklearn.ensemble import RandomForestClassifier
 Vá até a parte onde o XGBoost é inicializado e substitua por:
 
@@ -171,4 +178,5 @@ modelo = RandomForestClassifier(
     max_depth=5, 
     random_state=42
 )
+```
 O resto do pipeline (treinamento e avaliação) continua funcionando da mesma forma! A arquitetura Scikit-Learn facilita muito esse tipo de teste "plug-and-play".
