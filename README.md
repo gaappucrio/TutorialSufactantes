@@ -158,7 +158,7 @@ No arquivo extrator_etl.py, altere a linha 6:
 
 Mude de: caminho_json = 'demo_data/sample_db.json'
 
-Para: caminho_json = 'nome_do_seu_arquivo_gigante.json'
+Para: caminho_json = 'nome_do_seu_arquivo.json'
 
 Rode o python extrator_etl.py novamente. O script fará o parsing de todo o banco automaticamente.
 
