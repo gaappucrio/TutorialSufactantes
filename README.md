@@ -9,12 +9,13 @@ Para garantir que todos do grupo rodem o código sem o famoso erro "na minha má
 Instalação das dependências do sistema:
 Abra o terminal do WSL e execute:
 
-´´´bash
+```bash
 sudo apt update
 sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl git
+```
 Configuração do Python (via pyenv):
 
-'''bash
+```bash
 # Instala a versão correta para evitar erros de sintaxe (como nas f-strings)
 pyenv install 3.12.3
 
